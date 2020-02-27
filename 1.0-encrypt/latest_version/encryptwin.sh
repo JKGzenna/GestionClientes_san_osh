@@ -6,4 +6,4 @@ En MobaXterm, configure primero dentro de 'settings/general' una ruta para 'Pers
 Si configura esas rutas, cualquier paquete que instale para enriquecer su sesión de bash, estará disponible al reiniciar MobaXterm. 
 Después de configurar su sesión bash desde MobaXterm, ejecute 'apt-get install openssl -y' para instalar el paquete 'openssl'
 Si ha realizado estos pasos anteriores correctamente podrá usar este script sin errores de encriptación, en caso contrario realice dichos pasos."
-openssl enc -e -aes-256-cbc -md md5 -in "sb-jpa-santander-clientes-1.0" -out "sb-jpa-santander-clientes-1.0"
+openssl enc -e -aes-256-cbc -md md5 -in "sb-jpa-santander-clientes-1.0.jar" -out "sb-jpa-santander-clientes-1.0.encrypt"
