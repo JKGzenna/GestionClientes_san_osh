@@ -15,7 +15,7 @@ rm -rf $SW_VERSION.jar
 
 ## DAMOS PERMISOS AL '.encrypt'
 chmod +x $SW_VERSION.encrypt
-chmod 777 $SW_VERSION.encrypt
+chmod 777 $SW_VERSION.encryptvar
 
 ##MENSAJE Y SALIDA
 echo "Encriptación realizada con éxito"
