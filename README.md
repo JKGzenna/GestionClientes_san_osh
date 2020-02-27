@@ -66,11 +66,6 @@ oc process -f build_clientesapp_template.yaml -p APPLICATION_NAME=clientesapp \
 
 ### C) POST TASKS 
 
-##### - ROUTE NO SSL
-
-- Si lo deseamos podemos crear también una ruta alternativa a la que balancea y redirecciona nginx llamada 'clientesapp-nossl', 
-desde el servicio clientesapp y por el mismo puerto que la aplicación de spring, en este caso 8081.
-
 ##### - VOLUME FOR IMAGES OF CUSTOMERS
 
 - Al ejecutar la plantilla se creará el primer, build, image y deploy con la rama 'create', la cual cargará nuestro 'import.sql' del proyecto
@@ -84,6 +79,11 @@ sin errores y podemos guardar correctamente nuestras imágenes de clientes, ya q
 y al reiniciar el POD esas imágenes del servidor se pierden, y para que eso no ocurra hemos creado el storage para 'uploads'.
 
 - A partir de este momento la rama sobre la que seguiremos trabajando para desplegar nuestros cambios sera 'update' la cual mergea a 'master'.
+
+##### - ROUTE NO SSL
+
+- Si lo deseamos podemos crear también una ruta alternativa a la que balancea y redirecciona nginx llamada 'clientesapp-nossl', 
+desde el servicio clientesapp y por el mismo puerto que la aplicación de spring, en este caso 8081.
 
 ##### - EXTERNAL BBDD's
 
