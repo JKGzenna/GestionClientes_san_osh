@@ -58,7 +58,7 @@ oc process -f build_webserver_template.yaml -p APPLICATION_NAME=nginx-gestion \
 
 ```
 oc process -f build_clientesapp_template.yaml -p APPLICATION_NAME=clientesapp \
--p SOURCE_REPOSITORY_URL=https://github.com/JKGzenna/GestionClientes_openshift.git \
+-p SOURCE_REPOSITORY_URL=https://github.com/JKGzenna/GestionClientes_san_osh.git \
 -p CONTEXT_DIR='1.0-encrypt' -p SOURCE_SECRET=github-user -p APPLICATION_PORT=8081 \
 -p NGINX_SERVICE_NAME=nginx-gestion -p NGINX_PORT=8448 \
 -p SW_VERSION=sb-jpa-santander-clientes-1.0 -p HOSTNAME_HTTP= -p SOURCE_REPOSITORY_REF=create | oc apply -f-
@@ -66,29 +66,28 @@ oc process -f build_clientesapp_template.yaml -p APPLICATION_NAME=clientesapp \
 
 ### C) POST TASKS 
 
-##### - ROUTE NO SSL
-
-- Creamos también una ruta llamada clientesapp-nossl creada desde el servicio clientesapp y por el mismo puerto
-que la aplicación de spring, en este caso 8081
-
 ##### - VOLUME FOR IMAGES OF CUSTOMERS
 
-- Al ejecutar la plantilla se creará el primer, build, image y deploy con la rama 'create'
+- Al ejecutar la plantilla se creará el primer, build, image y deploy con la rama 'create', la cual cargará nuestro 'import.sql' del proyecto
+con los datos necesarios para arrancar la aplicación y los usuarios y roles securizados.
 
-- Creamos el storage para la carpeta 'update' y lo montamos en 
-'/opt/clientesapp/uploads' y lo asociamos a la aplicación con el nombre 'uploads', en ese momento se desplegará de nuevo el POD
-
-- accedemos a la aplicación y creamos un cliente con una imagen entrando como 'admin' '12345'
+- Creamos el storage para la carpeta 'uploads' y lo montamos en 
+'/opt/clientesapp' y lo asociamos a la aplicación con el nombre 'uploads', en ese momento se desplegará de nuevo el POD.
 
 - Hacemos un segundo build con la rama 'update' y cuando se actualizen la imagen y el deploy ya podemos acceder a la aplicación 
 sin errores y podemos guardar correctamente nuestras imágenes de clientes, ya que su hash va a la BBDD, pero la imagen va al servidor 
-y al reiniciar el POD esas imágenes del servidor se perdían, y para que eso no ocurra hemos creado el storage para 'uploads'
+y al reiniciar el POD esas imágenes del servidor se pierden, y para que eso no ocurra hemos creado el storage para 'uploads'.
 
-- A partir de este momento la rama sobre la que seguiremos trabajando para desplegar nuestros cambios sera 'update' la cual mergea a 'master'
+- A partir de este momento la rama sobre la que seguiremos trabajando para desplegar nuestros cambios sera 'update' la cual mergea a 'master'.
+
+##### - ROUTE NO SSL
+
+- Si lo deseamos podemos crear también una ruta alternativa a la que balancea y redirecciona nginx llamada 'clientesapp-nossl', 
+desde el servicio clientesapp y por el mismo puerto que la aplicación de spring, en este caso 8081.
 
 ##### - EXTERNAL BBDD's
 
-- Editamos el clientesapp deploymentconfig y añadimos las bases de datos que pudieran estar fuera del proyecto y que hicieran falta
+- Editamos el clientesapp deploymentconfig y añadimos las bases de datos que pudieran estar fuera del proyecto y que hicieran falta.
 ```
     hostAliases:
      - hostnames:
