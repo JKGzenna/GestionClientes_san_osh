@@ -75,7 +75,7 @@ con los datos necesarios para arrancar la aplicación y los usuarios y roles sec
 '/opt/clientesapp/uploads' y lo asociamos a la aplicación con el nombre 'uploads', en ese momento se desplegará de nuevo el POD.
 
 - Hacemos un segundo build con la rama 'update' y cuando se actualizen la imagen y el deploy ya podemos acceder a la aplicación 
-sin errores y podemos guardar correctamente nuestras imágenes de clientes, ya que su hash va a la BBDD, pero la imagen va al servidor 
+y podemos guardar correctamente nuestras imágenes de clientes, ya que su hash va a la BBDD, pero la imágen va al servidor 
 y al reiniciar el POD esas imágenes del servidor se pierden, y para que eso no ocurra hemos creado el storage para 'uploads'.
 
 - A partir de este momento la rama sobre la que seguiremos trabajando para desplegar nuestros cambios sera 'update' la cual mergea a 'master'.
