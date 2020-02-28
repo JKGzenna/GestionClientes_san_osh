@@ -72,7 +72,7 @@ oc process -f build_clientesapp_template.yaml -p APPLICATION_NAME=clientesapp \
 con los datos necesarios para arrancar la aplicación y los usuarios y roles securizados.
 
 - Creamos el storage para la carpeta 'uploads' y lo montamos en 
-'/opt/clientesapp' y lo asociamos a la aplicación con el nombre 'uploads', en ese momento se desplegará de nuevo el POD.
+'/opt/clientesapp/uploads' y lo asociamos a la aplicación con el nombre 'uploads', en ese momento se desplegará de nuevo el POD.
 
 - Hacemos un segundo build con la rama 'update' y cuando se actualizen la imagen y el deploy ya podemos acceder a la aplicación 
 sin errores y podemos guardar correctamente nuestras imágenes de clientes, ya que su hash va a la BBDD, pero la imagen va al servidor 
