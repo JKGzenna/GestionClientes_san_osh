@@ -2,7 +2,8 @@ FROM centos/s2i-core-centos7
 MAINTAINER Juan Luis Goldaracena
 
 ## CREATE FOLDERS FOR INSTALL SOFTWARE VERSION
-RUN mkdir -p /opt/clientesapp && chgrp -R 0 /opt/clientesapp
+RUN mkdir -p /opt/clientesapp && chgrp -R 0 /opt/clientesapp && \
+    mkdir -p /opt/clientesapp/uploads && chgrp -R 0 /opt/clientesapp/uploads
 
 ## INSTALL DEV PACKAGES
 RUN yum install epel-release curl java-1.8.0-openjdk glibc telnet net-tools \
@@ -14,8 +15,9 @@ RUN adduser --system -s /bin/bash -u 10001 -g 0 clientesapp
 ## INSTALL ENCRYPT SOFTWARE VERSION
 ADD latest_version/sb-jpa-santander-clientes-1.0.encrypt /tmp
 
-## FIX PERMISSIONS FOR '/opt/clientesapp' FOLDER
-RUN chmod 775 -R /opt/clientesapp && chown -R 10001 /opt/clientesapp
+## FIX PERMISSIONS FOR '/opt/clientesapp' and '/opt/clientesapp/uploads' FOLDERS
+RUN chmod 775 -R /opt/clientesapp && chown -R 10001 /opt/clientesapp && \
+    chmod 775 -R /opt/clientesapp/uploads && chown -R 10001 /opt/clientesapp/uploads
 
 ## COPY 'entrypoint.sh' WITH SECURIZATION FOR DECRYPT JAR FILES
 COPY entrypoint.sh /tmp/entrypoint.sh
