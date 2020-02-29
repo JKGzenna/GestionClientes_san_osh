@@ -64,6 +64,16 @@ oc process -f build_clientesapp_template.yaml -p APPLICATION_NAME=clientesapp \
 -p SW_VERSION=sb-jpa-santander-clientes-1.0 -p HOSTNAME_HTTP= -p SOURCE_REPOSITORY_REF=create | oc apply -f-
 ```
 
+##### - CREATE SFTP SERVER OPENSHIFT:
+
+```
+oc process -f build_sftpserver_template.yaml -p APPLICATION_NAME=sftpserver \
+-p SOURCE_REPOSITORY_URL=https://github.com/Telefonica/smartwifi_osh_sftp.git \
+-p SOURCE_PROXY='{ PROXY }' -p CONTEXT_DIR='{ REALM }' -p SOURCE_SECRET={ DEPLOYMENT_USER } \
+-p APPLICATION_PORT=2222 -p APPLICATION_TAG=v2.1.0 | oc -f- apply
+```
+
+
 ### C) POST TASKS 
 
 ##### - VOLUME FOR IMAGES OF CUSTOMERS
